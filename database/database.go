@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/nicodann/go-postgres-docker/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -35,4 +36,7 @@ func ConnectDb() {
 
 	log.Println("connected")
 	db.Logger = logger.Default.LogMode(logger.Info)
+
+	log.Println("running migrations")
+	db.AutoMigrate((&models.Fact{}))
 }
